@@ -8,79 +8,62 @@ def get_cpu_choice():
 
 def get_player_choice():
     while True:
-        player_choice = input("Choose rock, paper, or scissors: ").lower
+        player_choice = input("Choose rock, paper, or scissors: ")
 
         if player_choice in ["rock", "paper", "scissors"]:
             return player_choice
 
-
 def check_winner(cpu_choice, player_choice):
     if player_choice == cpu_choice:
-        winner = "Tie"
+        winner = "tie"
 
     elif cpu_choice == "rock":
         if player_choice == "paper":
-            winner = "PLAYER"
+            winner = "you win"
         else:
-            winner = "CPU"
+            winner = "AI"
 
     elif cpu_choice == "paper":
         if player_choice == "scissors":
-            winner = "PLAYER"
+            winner = "you win"
         else:
-            winner = "CPU"
+            winner = "AI"
 
     elif player_choice == "paper":
-        winner = "CPU"
+        winner = "AI"
 
     else:
-        winner = "PLAYER"
+        winner = "you win"
 
     return winner
-
-
 def play_round():
     cpu_choice = get_cpu_choice()
     player_choice = get_player_choice()
 
     winner = check_winner(cpu_choice, player_choice)
 
-    print("CPU chose:", cpu_choice)
-    print("Winner:", winner)
-
+    print("the AI chose", cpu_choice)
+    print("you chose", player_choice)
     return winner
-
-
-# Keep track of the score
 player_wins = 0
 cpu_wins = 0
 ties = 0
-
-
-# Tournament continues until someone gets 3 wins
 while player_wins < 3 and cpu_wins < 3:
-
     winner = play_round()
+    print(f"The result stored in \"winner\" is {winner}")
 
-    if winner == "PLAYER":
+    if winner == "you win":
         player_wins += 1
-
-    elif winner == "CPU":
+    elif winner == "AI":
         cpu_wins += 1
-
     else:
         ties += 1
-
-    print("Score:")
-    print("Player:", player_wins)
-    print("CPU:", cpu_wins)
-    print("Ties:", ties)
+    print("score:")
+    print("you WON", player_wins)
+    print("AI won (do better):", cpu_wins)
+    print("You both tied", ties)
     print()
-
-
-# Display the overall winner
 if player_wins == 3:
-    print("PLAYER wins the tournament!")
-
+    print("You won the tournament!")
 else:
-    print("CPU wins the tournament!")
+    print("the AI unfortunatly wins the tournament!")
